@@ -3,5 +3,36 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    script(src="/javascripts/auth.js", defer)
+    script(src="/javascripts/main.js", defer)
+  body(class="bg-zinc-200 h-screen max-h-screen overflow-hidden box-border")
+    div(id='container' class='h-full w-full pb-1 overflow-y-hidden flex flex-col gap-y-6')
+      div(class="bg-[#b6c9ba] py-6 px-12 h-[10%]")
+        div(class="flex justify-between items-center h-full") 
+          div(class="text-lg font-bold") 
+            spn(class="text-rose-700") J
+            | enny-Ngama
+          div(class='flex gap-x-2 items-center')
+            img(src="/images/person.svg", alt="avatar" class="w-8")
+            div.name(class='capitalize text-xl font-bold')
+      div(class="flex h-[90%]")        
+        div(class="bg-[#b6c9ba] text-xl roboto-bold lg:w-[280px] font-semibold h-full")
+          div(class="h-4/5 pt-4")
+            h1(class="mb-6 text-center") Tableau de bord
+            div(class="flex flex-col justify-between")
+              h2(class='hover:opacity-80 hover:bg-slate-600') 
+                a(href='/dashboard' class="block px-6 py-3") Menu
+              a(href="/messages" class="flex items-center gap-x-2 px-6 py-3 hover:opacity-80 hover:bg-slate-600") 
+                img(src="/images/mail.svg" class="w-8")
+                span Messages
+              a(href="/demandes" class="flex items-center gap-x-2 px-6 py-3 hover:opacity-80 hover:bg-slate-600")
+                img(src="/images/data_thresholding.svg" class="w-8")
+                span Mes projets
+              a(href="/rapport" class="flex items-center gap-x-2 px-6 py-3 hover:opacity-80 hover:bg-slate-600") 
+                img(src="/images/monitoring.svg" class="flex items-center gap-x-2" class="w-8")
+                span Parametres
+          div.logout(class="flex items-center gap-x-3 cursor-pointer px-6 hover:opacity-80 hover:bg-slate-600 h-1/5") 
+            img(src="/images/logout.svg", alt="logout" class="w-6")
+            span  Se déconnecter
+        div(class="roboto-regular overflow-y-scroll h-full w-full px-3")
+          block content

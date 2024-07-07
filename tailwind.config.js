@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary-blue': '#051433',
+        'redColor': '#051433',
         'secondary-blue': '#00194C',
         'sky-blue': '#0055ff',
         "btn-color": '#003366',
@@ -19,8 +19,7 @@ module.exports = {
         "2xl": "1386px"
       },
       backgroundImage: {
-        'bg_desktop': "url('/images/bg-desktop.jpg')",
-        'bg_fecLogo': "url('/images/logofec02.jpg')"
+        'bg_gray': "url('/images/bg-icon-gray.jpg')",
       },
     },
   },

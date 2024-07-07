@@ -5,9 +5,11 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="/javascripts/auth.js" defer) 
   body
-    div(class="flex flex-col justify-center items-center h-screen gap-y-12 bg-bg_desktop")
-      div(class="") Jenny-Ngama
-      div(class="w-3/5 p-6 text-white rounded-lg lg:w-2/5" style='background: linear-gradient(to left top, #00194C -19%, #d7e5fa, #d7e5fa, 95%, #00194C)')
+    div(class="flex flex-col justify-center items-center h-screen gap-y-12 bg-bg_gray")
+      div(class="text-lg font-bold") 
+        spn(class="text-rose-700") J
+        | enny-Ngama
+      div(class="w-3/5 p-6 text-white rounded-lg lg:w-2/5 bg-[#d0e4ed]")
         form.formAuth(action="/" method="post")
           h1(class="font-bold text-secondary-blue text-center text-xl py-1 sm:text-2xl sm:p-3 md:text-3xl lg:mb-6 lg:text-center lg:text-4xl xl:text-4xl") Se connecter
           div.card
@@ -18,5 +20,5 @@ html
             div(class='flex items-center gap-x-3')
               input(type="checkbox" id="viewPassword" class="border-2 rounded-lg w-5 h-5")
               label(for="viewPassword" class="text-primary-blue") Afficher le mot de passe
-          button(type="submit" class="mt-5 bg-btn-color p-3 font-bold rounded-lg hover:opacity-80 text-lg") Se connecter
+          button(type="submit" class="mt-5 bg-[#1368a8] p-3 font-bold rounded-lg hover:opacity-80 text-lg") Se connecter
           
