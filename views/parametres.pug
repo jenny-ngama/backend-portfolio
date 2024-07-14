@@ -1,0 +1,46 @@
+extends layout
+  
+block content
+    div(class="h-full w-full")
+        div
+            h1(class="text-center font-extrabold text-xl md:text-2xl lg:text-3xl xl:text-4xl py-6") Mettre à jour les informations de connexion
+            div(class="bg-red-50 p-6 mt-6 w-max mx-auto shadow-lg") 
+                h2(class="text-center text-2xl mb-3") Dernier modification
+                - const lastUser = users[users.length - 1]
+                if lastUser
+                    p 
+                        | Date du dernier modification : 
+                        span(class="font-semibold capitalize") #{lastUser.nom}
+                else
+                    p Aucune modification trouvée
+            div(class="flex p-3 lg:gap-x-8 lg:border-2")
+                form.signup(action="#", method="POST" class="p-6 flex flex-col my-3 w-full bg-gray-50")
+                    h2(class='text-lg font-bold mb-6 lg:text-2xl') Créer un nouveau utilisateur
+                    input(type="text", id="prenomSignup", name="prenom" placeholder='Prenom' class="border-2 focus:bg-slate-200 rounded-lg p-2 my-1")
+                    input(type="text", id="nomSignup", name="nom" placeholder='Nom' class="border-2 focus:bg-slate-200 rounded-lg p-2 my-1")
+                    input(type="email", id="emailSignup", name="email" placeholder='Email' class="border-2 rounded-lg p-2 my-1")
+                    input(type="password", id="passwordSignup", name="password" placeholder='Password' class="border-2 focus:bg-slate-200 rounded-lg p-2 my-1")
+                    input(type="number", id="telephoneSignup", name="telephone" placeholder='Télephone' class="border-2 focus:bg-slate-200 rounded-lg p-2 my-1")
+                    select(id="roleSignup", name="role" class="border-2 rounded-lg p-2 my-1")
+                        option(value="") Choisir un rôle
+                        option(value="administrateur") Administrateur
+                        option(value="utilisateur") Utilisateur
+                    button(type="submit" class="bg-slate-500 cursor-pointer hover:opacity-80 p-2 font-bold text-white rounded-lg my-2 text-lg") Créer le compte
+                form.putUser(action="#", method="POST" class="p-3 flex flex-col my-3 w-full bg-gray-50")
+                    h2(class='text-lg font-bold mb-6 lg:text-2xl') Modifier un utilisateur
+                    select(id="user", name="user" class="border-2 rounded-lg p-2 my-1")
+                        option(value="") Choisir un utilisateur
+                        each user in users
+                            option(value=user.requestId data-id=user.requestId)= user.profil_user.nom
+                    input(type="text", id="putPrenom", name="prenom" placeholder='Prenom' class="border-2 rounded-lg p-2 my-1")
+                    input(type="text", id="putNom", name="nom" placeholder='Nom' class="border-2 rounded-lg p-2 my-1")
+                    input(type="email", id="putEmail", name="email" placeholder='Email' class="border-2 rounded-lg p-2 my-1")
+                    input(type="text", id="putPassword", name="password" placeholder='Password' class="border-2 rounded-lg p-2 my-1")
+                    input(type="number", id="putTelephone", name="telephone" placeholder='Télephone' class="border-2 rounded-lg p-2 my-1")
+                    select(id="putRole", name="role" class="border-2 rounded-lg p-2 my-1")
+                        option(value="") Choisir un rôle
+                        option(value="administrateur") Administrateur
+                        option(value="utilisateur") Utilisateur
+                    button(type="submit" class="bg-slate-500 cursor-pointer hover:opacity-80 p-2 font-bold text-white rounded-lg my-2 text-lg") Valider les modifications
+
+    script(src="/javascripts/users.js")

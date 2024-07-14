@@ -1,0 +1,41 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  requestId         String    @unique
+  nom      String
+  email    String @unique
+  password String
+  date_inscription    DateTime @default(now())
+}
+
+model Message {
+  id          Int       @id @default(autoincrement())
+  requestId         String    @unique
+  nom     String
+  email    String
+  objet    String
+  message    String
+  read    Boolean @default(false)
+  confirmed Boolean @default(false)
+  date        DateTime  @default(now())
+  reponse Boolean @default(false)
+  message_reponse MessageReponse?
+}
+
+model MessageReponse {
+  id          Int       @id @default(autoincrement())
+  requestId         String    @unique
+  objet     String
+  reponse   String
+  date        DateTime  @default(now())
+  message     Message     @relation(fields: [messageRequestId], references: [requestId])
+  messageRequestId       String  @unique
+}
