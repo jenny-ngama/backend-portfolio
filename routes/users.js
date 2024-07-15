@@ -1,9 +1,19 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const middlewareAuth = require('../middleware/auth');
+const ctr_adm = require('../controllers/controller_adm');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+// API SERVER
+router.post('/server/signup', middlewareAuth, ctr_adm.serverSignup);
+router.post('/server/login', ctr_adm.serverLogin);
+router.post('/server/logout', middlewareAuth, ctr_adm.serverLogout);
+router.get('/server', middlewareAuth, ctr_adm.serverUsersGet);
+router.get('/server/data', middlewareAuth, ctr_adm.serverUsersJson);
+router.get('/server/create', ctr_adm.serverUserCreate);
+router.get('/server/:requestId', middlewareAuth, ctr_adm.serverUserGet);
+router.get('/server/data/:requestId', middlewareAuth, ctr_adm.serverUserGetJson);
+router.put('/server/:requestId', middlewareAuth, ctr_adm.serverUserPut);
+router.delete('/server/:requestId', middlewareAuth, ctr_adm.serverUserDelete);
+router.post('/', middlewareAuth, ctr_adm.serverUsersEmpty);
 
 module.exports = router;
