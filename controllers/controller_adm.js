@@ -12,7 +12,6 @@ function generateAuthToken(user) {
     userId: user.requestId,
     email: user.email,
     nom: user.nom,
-    role: user.role
   };
   const secretKey = process.env.RANDOM_TOKEN_SECRET;
   const token = jwt.sign(payload, secretKey, { expiresIn: "24h" });
@@ -24,7 +23,7 @@ function generateAuthToken(user) {
 
 exports.serverSignup = async (req, res) => {
   try {
-    const { nom, email, telephone, password, role } = req.body;
+    const { nom, email, password } = req.body;
     const passwordHash = bcrypt.hashSync(password, 10);
 
     const newAdm = await prisma.user.create({
@@ -33,23 +32,7 @@ exports.serverSignup = async (req, res) => {
         nom,
         email,
         password: passwordHash,
-        role,
         date_inscription: new Date(),
-        profil_user: {
-          create: {
-            requestId: requestId,
-            nom,
-            telephone,
-          },
-        },
-        suivi_user: {
-          create: [
-            {
-              requestId: requestId,
-              notifications: "Bienvenue sur votre compte administrateur",
-            },
-          ],
-        },
       },
     });
     res.status(201).json({ message: "Administrateur créé avec succès" });
@@ -107,12 +90,7 @@ exports.serverLogout = async (req, res) => {
 
 exports.serverUsersGet = async (req, res) => {
   try {
-    const users = await prisma.user.findMany({
-      include: {
-        profil_user: true,
-        suivi_user: true,
-      },
-    });
+    const users = await prisma.user.findMany();
 
     res.status(200).render("users", { users });
   } catch (error) {
@@ -125,12 +103,7 @@ exports.serverUsersGet = async (req, res) => {
 
 exports.serverUsersJson = async (req, res) => {
   try {
-    const users = await prisma.user.findMany({
-      include: {
-        profil_user: true,
-        suivi_user: true,
-      },
-    });
+    const users = await prisma.user.findMany();
 
     res.status(200).json({users: users });
   } catch (error) {
@@ -145,13 +118,7 @@ exports.serverUserGet = async (req, res) => {
   try {
     const { requestId } = req.params;
 
-    const user = await prisma.user.findUnique({
-      where: { requestId: requestId },
-      include: {
-        suivi_user: true,
-        profil_user: true,
-      },
-    });
+    const user = await prisma.user.findUnique();
 
     if (!user) {
       return res.status(404).json({ message: "Utilisateur non trouvé" });
@@ -167,13 +134,7 @@ exports.serverUserGetJson = async (req, res) => {
   try {
     const { requestId } = req.params;
 
-    const user = await prisma.user.findUnique({
-      where: { requestId: requestId },
-      include: {
-        suivi_user: true,
-        profil_user: true,
-      },
-    });
+    const user = await prisma.user.findUnique();
 
     if (!user) {
       return res.status(404).json({ message: "Utilisateur non trouvé" });
@@ -188,7 +149,7 @@ exports.serverUserPut = async (req, res) => {
   try {
     const { requestId } = req.params;
 
-    const { nom, email, telephone, password, role } = req.body;
+    const { nom, email, password } = req.body;
 
     const user = await prisma.user.findUnique({
       where: { requestId: requestId },
@@ -205,15 +166,6 @@ exports.serverUserPut = async (req, res) => {
           password === user.password
             ? user.password
             : bcrypt.hashSync(password, 10),
-        role: role || user.role,
-        profil_user: {
-          update: {
-            data: {
-              nom: nom || user.nom,
-              telephone: telephone || user.telephone,
-            },
-          },
-        },
       },
     });
 
@@ -221,41 +173,6 @@ exports.serverUserPut = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Erreur interne du serveur" });
-  }
-};
-
-exports.serverUserDelete = async (req, res) => {
-  try {
-    const { requestId } = req.params;
-
-    await prisma.suiviUser.deleteMany({
-      where: {
-        userRequestId : requestId,
-      },
-    });
-
-    await prisma.profil.deleteMany({
-      where: {
-        userRequestId : requestId,
-      },
-    });
-
-    await prisma.confirmationUser.deleteMany({
-      where: {
-        userRequestId : requestId,
-      },
-    });
-
-    await prisma.user.delete({
-      where: { requestId: requestId },
-    });
-
-    res.status(200).json({message : "Utilisateur supprimé avec succès"});
-  } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ message: "Erreur lors de la suppression de l'utilisateur" });
   }
 };
 

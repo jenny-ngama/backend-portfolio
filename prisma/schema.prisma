@@ -21,7 +21,6 @@ model Message {
   requestId         String    @unique
   nom     String
   email    String
-  objet    String
   message    String
   read    Boolean @default(false)
   confirmed Boolean @default(false)
