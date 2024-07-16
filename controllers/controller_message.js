@@ -9,7 +9,7 @@ function isValidEmail(email) {
 }
 
 exports.messageReceive = async (req, res) => {
-  const { nom, email, objet, message } = req.body;
+  const { nom, email, message } = req.body;
 
   try {
     const nouveauMessage = await prisma.message.create({
@@ -17,7 +17,6 @@ exports.messageReceive = async (req, res) => {
         requestId,
         nom,
         email,
-        objet,
         message,
         confirmed: false
       }

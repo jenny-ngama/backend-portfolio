@@ -9,11 +9,10 @@ router.post('/server/login', ctr_adm.serverLogin);
 router.post('/server/logout', middlewareAuth, ctr_adm.serverLogout);
 router.get('/server', middlewareAuth, ctr_adm.serverUsersGet);
 router.get('/server/data', middlewareAuth, ctr_adm.serverUsersJson);
-router.get('/server/create', ctr_adm.serverUserCreate);
+router.get('/server/create', middlewareAuth, ctr_adm.serverUserCreate);
 router.get('/server/:requestId', middlewareAuth, ctr_adm.serverUserGet);
 router.get('/server/data/:requestId', middlewareAuth, ctr_adm.serverUserGetJson);
 router.put('/server/:requestId', middlewareAuth, ctr_adm.serverUserPut);
-router.delete('/server/:requestId', middlewareAuth, ctr_adm.serverUserDelete);
 router.post('/', middlewareAuth, ctr_adm.serverUsersEmpty);
 
 module.exports = router;
