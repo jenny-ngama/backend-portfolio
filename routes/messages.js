@@ -4,7 +4,7 @@ const middlewareAuth = require('../middleware/auth');
 const ctr_message = require('../controllers/controller_message');
 
 router.post('/receive', ctr_message.messageReceive);
-router.get('/', ctr_message.messagesGet);
-router.get('/:id', ctr_message.messageGet);
+router.get('/', middlewareAuth, ctr_message.messagesGet);
+router.get('/:id', middlewareAuth, ctr_message.messageGet);
 
 module.exports = router;

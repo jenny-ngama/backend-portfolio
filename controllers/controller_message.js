@@ -2,7 +2,6 @@ require('dotenv').config();
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const uuid = require("uuid");
-const requestId = uuid.v4();
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -10,6 +9,7 @@ function isValidEmail(email) {
 
 exports.messageReceive = async (req, res) => {
   const { nom, email, message } = req.body;
+  const requestId = uuid.v4();
 
   try {
     const nouveauMessage = await prisma.message.create({
@@ -30,33 +30,34 @@ exports.messageReceive = async (req, res) => {
   }
 };
 
-exports.messagesGet = async(req, res) => {
+exports.messagesGet = async (req, res) => {
   try {
     const messages = await prisma.message.findMany();
-    res.status(200).render('messages', {messages})
+    res.status(200).render('messages', { messages });
   } catch (error) {
     console.error(error);
+    res.status(500).send('Une erreur s\'est produite lors de la récupération des messages.');
   }
-}
+};
 
-exports.messageGet = async(req, res) => {
+exports.messageGet = async (req, res) => {
   try {
-      const { id } = req.params;
-  
-      const message = await prisma.message.findUnique({
-        where: { requestId: requestId },
-        include: {
-         message_reponse: true
-        }
-      });
-  
-      if (!message) {
-        return res.status(404).json({ message: 'message non trouvée' });
+    const { id } = req.params;
+
+    const message = await prisma.message.findUnique({
+      where: { requestId: id },
+      include: {
+        message_reponse: true
       }
-  
-      res.status(200).render('message', {message});
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Erreur lors de la récupération du message" });
+    });
+
+    if (!message) {
+      return res.status(404).json({ message: 'Message non trouvé' });
     }
-}
+
+    res.status(200).render('message', { message });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur lors de la récupération du message' });
+  }
+};
