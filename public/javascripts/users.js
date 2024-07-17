@@ -99,7 +99,7 @@ function createUser() {
       if (response.status === 201) {
         const message = await response.json();
         window.localStorage.setItem('userCreate', message.message)
-        return (window.location.href = "/users/server");
+        return (window.location.href = "/users/server/create");
       }
       return messageAlerte(
         "Erreur inconnue lors de la création de l'utilisateur"
@@ -159,7 +159,7 @@ function putUser() {
       if (response.status === 200) {
         const message = await response.json();
         window.localStorage.setItem('userUpdate', message.message)
-        window.location.href = "/users/server";
+        window.location.href = "/users/server/create";
       } else {
         const message = await response.json()
         messageAlerte(message.message)

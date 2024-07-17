@@ -61,18 +61,14 @@ exports.serverLogin = async (req, res) => {
     const descendRemonte = `EDNICMPSSR${name}`;
 
     const token = generateAuthToken(adm);
+    res
+      .status(200)
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+      })
+      .json(descendRemonte);
 
-    if (adm.role === "administrateur") {
-      res
-        .status(200)
-        .cookie("token", token, {
-          httpOnly: true,
-          secure: true,
-        })
-        .json(descendRemonte);
-    } else {
-      res.status(400).json({ message: "Erreur lors de la connexion" });
-    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Erreur interne du serveur" });
