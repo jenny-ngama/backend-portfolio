@@ -40,6 +40,36 @@ exports.messagesGet = async (req, res) => {
   }
 };
 
+exports.messagesData = async (req, res) => {
+  try {
+    const messages = await prisma.message.findMany();
+    res.status(200).json(messages);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Une erreur s\'est produite lors de la récupération des messages.');
+  }
+};
+
+exports.messagesPut = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const updatedMessages = await prisma.message.updateMany({
+      where: { email },
+      data: {
+        read: true,
+      },
+    });
+
+    return res.status(200).json({ count: updatedMessages.count });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Erreur lors de la mise à jour des messages' });
+  }
+};
+
+
+
 exports.messageGet = async (req, res) => {
   try {
     const { id } = req.params;

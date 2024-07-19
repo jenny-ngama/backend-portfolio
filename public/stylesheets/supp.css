@@ -1,0 +1,113 @@
+.messages ul {
+    position: relative;
+    padding: 25px;
+    margin-block: 25px;
+    border: 2px solid black;
+    border-radius: 12px;
+}
+.messages ul::after {
+    content: url('/images/expand_circle.svg');
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #9dacc0;
+    border-radius: 50%;
+}
+.messages .active-ul::after {
+    display: none;
+}
+.messages .active-ul {
+    min-height: 200px;
+}
+.messages li {
+    padding-block: 12px;
+    border-bottom: 2px solid #797777;
+}
+.messages li {
+    display: none;
+}
+.active-ul li {
+    display: block;
+}
+.messages li:first-child {
+    display: block;
+    border-bottom: none;
+}
+.active-ul li:first-child {
+    border-bottom: 2px solid #797777;
+}
+.messages li:last-child {
+    border-bottom: none;
+}
+.messages .head {
+    display: flex;
+    justify-content: space-between;
+}
+.head div:nth-child(1) {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.sendMessage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    background-color: #9dacc0;
+    padding: 16px 20px;
+    border-radius: 8px;
+}
+.active-ul .sendMessage {
+    display: flex;
+}
+.sendMessage textarea {
+    display: block;
+    width: 100%;
+    border-radius: 12px;
+}
+.sendMessage button {
+    color: white;
+    font-weight: 600;
+}
+.notifications {
+    position: absolute;
+    bottom: 12px;
+    right: 25px;
+    color: white;
+    background-color: rgb(204, 17, 17);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.active-ul .notifications {
+    display: none;
+}
+
+.messagesNav {
+    position: relative;
+}
+.messagesNav div {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    color: white;
+    background-color: rgb(204, 17, 17);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

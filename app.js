@@ -8,7 +8,8 @@ const cors = require('cors');
 const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 const dashboardRouter = require('./routes/dashboard');
-const messages = require('./routes/messages')
+const messages = require('./routes/messages');
+const projets = require('./routes/projets');
 
 const app = express();
 app.use(cors());
@@ -27,6 +28,7 @@ app.use('/', authRouter);
 app.use('/users', usersRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/messages', messages);
+app.use('/projets', projets);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
