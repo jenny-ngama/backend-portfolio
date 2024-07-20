@@ -5,11 +5,12 @@ html
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="/stylesheets/layout.css")
     script(src="/javascripts/auth.js", defer)
     script(src="/javascripts/main.js", defer)
   body
-    div(class="bg-zinc-200 h-screen h-screen box-border")
-      div(id='container' class='grid grid-cols-2 grid-rows-[72px,auto,90px] h-screen' /*h-full w-full pb-1 overflow-y-hidden flex flex-col gap-y-6*/)
+    div#container(class="bg-zinc-200 box-border")
+      div(class='grid grid-cols-2 grid-rows-[72px,auto,90px] h-full' /*h-full w-full pb-1 overflow-y-hidden flex flex-col gap-y-6*/)
         div(class="bg-slate-500 py-6 px-6 col-start-1 col-end-3 row-start-1 row-end-2 text-lg font-bold text-zinc-200 flex items-center") Jenny-Ngama
         div(class="col-start-1 col-end-3 row-start-3 row-end-4 bg-slate-700 text-xl roboto-bold font-semibold flex items-center justify-between py-5" /*sm:w-1/3 lg:w-[280px]*/)        
           h1(class="mb-6 text-center hidden") Tableau de bord
@@ -32,3 +33,5 @@ html
             span(class='hidden')  Se déconnecter
         div(class="col-start-1 col-end-3 row-start-2 row-end-3 roboto-regular p-5 overflow-y-scroll h-full")
           block content
+
+  script(src="/javascripts/layout.js")
