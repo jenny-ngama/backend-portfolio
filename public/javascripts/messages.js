@@ -62,7 +62,8 @@ async function addMessages() {
                     const nom = document.createElement('div');
                     nom.textContent = message.nom;
                     const date = document.createElement('div');
-                    date.textContent = message.date;
+                    date.classList.add('date')
+                    date.textContent = dateConvers(message.date);
         
                     const text = document.createElement('p'); 
                     text.textContent = message.message; 
@@ -144,4 +145,19 @@ async function readMessage(user) {
         console.error(error);
     }
 }
-  
+
+/* FORMAT DATE */
+function dateConvers(enterDate) {
+  const dateString = enterDate
+  const date = new Date(dateString);
+
+  const jour = date.getDate().toString().padStart(2, '0');
+  const mois = (date.getMonth() + 1).toString().padStart(2, '0');
+  const annee = date.getFullYear().toString();
+
+  const heure = date.getHours().toString().padStart(2, '0');
+  const minute = date.getMinutes().toString().padStart(2, '0');
+
+  const dateFormatee = `${jour}/${mois}/${annee} ${heure}:${minute}`;
+  return dateFormatee;
+}
