@@ -1,21 +1,21 @@
 extends layout
   
 block content
-    div(class="h-full grid grid-cols-2 grid-rows-[repeat(2,max-content),repeat(2,auto)] gap-6 px-6")
-        h1(class="col-start-1 col-end-3 row-start-1 row-end-2 text-center font-extrabold text-xl md:text-2xl lg:text-3xl xl:text-4xl") Liste des messages
-        div(class="col-start-1 col-end-2 row-start-2 row-end-3 bg-gray-50 p-3 my-3 flex flex-col items-center justify-center")
-            h2(class="text-2xl font-semibold py-3") Nouveux messages
-            p(class="rounded-full p-5 w-12 h-12 w-32 h-32 text-xl font-bold border-2 bg-slate-200 border-2 border-slate-300 flex justify-center items-center") !{messages.filter(message => message.read === false).length}
-        ul.statistic(class="col-start-2 col-end-3 row-start-2 row-end-3 bg-gray-50 p-3 flex flex-col my-3 gap-y-4")
-            h2(class='text-2xl font-bold mb-2 text-center') Les statistiques
-            li.ml-6 Nombre total de nessages: !{messages.length}
-            li.ml-6 Nombre de messages non lus: !{messages.filter(message => message.read === false).length}
-            li.ml-6 Nombre de messages lus: !{messages.filter(message => message.read === true).length}
-        div.liste-messages(class="bg-gray-50 p-6 col-start-1 col-end-3 row-start-3 row-end-5")
-            h2(class="font-bold text-2xl mb-3 py-3 flex justify-between") 
-                p Vos messages
-                a(href="/messages" class='text-white bg-blue-900 p-2 font-semibold rounded-lg text-lg') Actualiser les messages
-            div.messages
+    div(class="h-full px-2")
+        h1(class="text-center font-extrabold text-lg md:text-2xl lg:text-3xl xl:text-4xl") Liste des messages
+        div(class="flex items-center justify-center gap-x-5")
+            div(class="w-2/5")
+                div(class="rounded-full text-lg text-red-700 font-bold border-2 border-solid border-slate-300 w-24 h-24 mx-auto flex justify-center items-center shadow-md") !{messages.filter(message => message.read === false).length}
+            ul.statistic(class="py-3 flex flex-col my-3 gap-y-2 w-3/5 border-2 border-solid border-slate-400")
+                h2(class='text-md font-bold mb-2 text-center') Les statistiques
+                li(class="ml-6 text-sm") Total nessages: !{messages.length}
+                li(class="ml-6 text-sm") Messages non lus: !{messages.filter(message => message.read === false).length}
+                li(class="ml-6 text-sm") Messages lus: !{messages.filter(message => message.read === true).length}
+        div.liste-messages(class="bg-zinc-200 py-3 rounded-md shadow-inner shadow-zinc-400")
+            h2(class="font-bold text-md mb-3 py-3 flex justify-between items-center border-b-2 border-solid border-zinc-400") 
+                p(class='px-6') Vos messages
+                a(href="/messages" class='text-white bg-blue-900 mr-6 p-2 font-semibold rounded-lg text-sm') Actualiser
+            div(class="px-6").messages
            
     script(src="/javascripts/messages.js")
     link(rel="stylesheet", href="/stylesheets/supp.css")

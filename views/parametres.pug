@@ -3,24 +3,23 @@ extends layout
 block content
     div(class="h-full w-full relative")
         div
-            h1(class="text-center font-extrabold text-xl md:text-2xl lg:text-3xl xl:text-4xl py-6") Mettre à jour les informations de connexion
-            div(class="bg-red-50 w-1/2 p-6 mt-6 mx-auto shadow-lg") 
-                h2(class="text-center text-2xl mb-3") Dernier modification
+            h1(class="text-center font-extrabold text-xl md:text-2xl lg:text-3xl xl:text-4xl py-6") Paramètres de connexion
+            div(class="w-4/5 p-2 mt-3 mx-auto shadow-lg border-[1px] border-slate-500 border-solid") 
+                h2(class="text-center text-xl mb-3") Dernier modification
                 - const lastUser = users[users.length - 1]
                 if lastUser
                     p(class='text-center')  
-                        | Date du dernier modification : 
-                        span(class="font-semibold capitalize") #{lastUser.nom}
+                        span(class="font-semibold capitalize") #{new Date(lastUser.date_inscription).getDay() +'/'+ new Date(lastUser.date_inscription).getMonth() +'/'+ new Date(lastUser.date_inscription).getFullYear() +' '+ new Date(lastUser.date_inscription).getHours() +':'+ new Date(lastUser.date_inscription).getMinutes()}
                 else
                     p(class='text-center') Aucune modification trouvée
             div(class="flex justify-center gap-6 text-white mt-8")
-                div.btn-signup(class="w-2/6 h-xl bg-slate-500 flex flex-col items-center p-5 shadow-lg hover:cursor-pointer")
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-                    p(class='text-center') Ajouter un nouveau compte
-                div.btn-putUser(class="w-2/6 h-xl bg-slate-500 flex flex-col items-center p-5 shadow-lg hover:cursor-pointer")
+                div.btn-signup(class="w-3/6 h-xl flex flex-col items-center p-5 shadow-lg hover:cursor-pointer border-2 border-slate-500 border-dashed text-slate-700")
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#334155"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                    p(class='text-center') Nouveau compte
+                div.btn-putUser(class="w-3/6 h-xl bg-slate-400 flex flex-col items-center p-5 shadow-lg hover:cursor-pointer")
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M216-720h528l-34-40H250l-34 40Zm184 270 80-40 80 40v-190H400v190ZM200-120q-33 0-56.5-23.5T120-200v-499q0-14 4.5-27t13.5-24l50-61q11-14 27.5-21.5T250-840h460q18 0 34.5 7.5T772-811l50 61q9 11 13.5 24t4.5 27v139q-21 0-41.5 3T760-545v-95H640v205l-77 77-83-42-160 80v-320H200v440h280v80H200Zm440-520h120-120Zm-440 0h363-363Zm360 520v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q8 9 12.5 20t4.5 22q0 11-4 22.5T903-340L683-120H560Zm300-263-37-37 37 37ZM620-180h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z"/></svg>
                     p(class='text-center') Modifier le compte existant
-            div.sittings(class="flex p-3 lg:gap-x-8 lg:border-2")
+            div.sittings(class="flex lg:gap-x-8 lg:border-2")
                 form.signup(action="#", method="POST" class="p-6 flex flex-col my-3 w-full bg-gray-50 hidden")
                     div(class="flex justify-end")
                         <svg xmlns="http://www.w3.org/2000/svg" class='closeSignup hover:cursor-pointer' height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>

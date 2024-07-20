@@ -49,12 +49,9 @@ function settingsUser(element) {
   container.style.position = 'absolute';
   container.style.top = '0';
   container.style.left = '0';
-  container.style.backgroundColor = '#000000ad';
   container.style.width = '100%';
-  container.style.height = '100%';
-
+  container.style.height = 'auto';
   element.style.display = 'flex';
-  element.style.width = '45%';
   element.style.marginInline = 'auto';
 }
 
