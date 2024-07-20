@@ -1,0 +1,20 @@
+#container {
+    height: 100svh;
+}
+.messagesNav {
+    position: relative;
+}
+.messagesNav div {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    color: white;
+    background-color: rgb(204, 17, 17);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

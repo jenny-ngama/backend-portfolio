@@ -31,8 +31,6 @@ async function addMessages() {
             const messages = await response.json();
             const groupesMessages = Object.values(grouperParEmail(messages));
 
-            let notiMessage = 0;
-
             for(let groupe of groupesMessages) {
                 const ul = document.createElement('ul');
                 
@@ -52,7 +50,6 @@ async function addMessages() {
                 for(let message of groupe) {
                     if(message.read === false) {
                         nbre +=1;
-                        notiMessage +=1;
                     }
                     const li = document.createElement('li');
                     li.setAttribute('data-email', message.email);
@@ -82,15 +79,6 @@ async function addMessages() {
                   notifications && notifications.remove();
                 }
                 listMessages.appendChild(ul);
-            }
-            
-            if(notiMessage > 0) {
-              const messageNav = document.querySelector('.messagesNav');
-              const div = document.createElement('div');
-              div.textContent = notiMessage
-              messageNav.appendChild(div)
-            } else {
-              messageNav && messages.remove();
             }
         } else {
             const error = await response.json();
