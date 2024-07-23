@@ -2,9 +2,9 @@ extends layout
   
 block content
     div(class="h-full w-full relative")
-        div
+        div(class="md:px-6")
             h1(class="text-center font-extrabold text-xl md:text-2xl lg:text-3xl xl:text-4xl py-6") Paramètres de connexion
-            div(class="w-4/5 p-2 mt-3 mx-auto shadow-lg border-[1px] border-slate-500 border-solid") 
+            div(class="w-4/5 p-2 mt-3 mx-auto shadow-lg border-[1px] border-slate-500 border-solid md:max-w-[320px]") 
                 h2(class="text-center text-xl mb-3") Dernier modification
                 - const lastUser = users[users.length - 1]
                 if lastUser

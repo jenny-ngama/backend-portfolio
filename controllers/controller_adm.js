@@ -130,12 +130,12 @@ exports.serverUserGetJson = async (req, res) => {
   try {
     const { requestId } = req.params;
 
-    const user = await prisma.user.findUnique();
+    const adm = await prisma.user.findUnique({ where: { requestId } });
 
-    if (!user) {
-      return res.status(404).json({ message: "Utilisateur non trouvé" });
+    if (!adm) {
+      return res.status(404).json({ message: "Administrateur non trouvé" });
     }
-    res.status(200).json(user);
+    res.status(200).json(adm);
   } catch (error) {
     res.status(500).json({ message: "Erreur server" });
   }
@@ -158,6 +158,8 @@ exports.serverUserPut = async (req, res) => {
       where: { requestId: requestId },
       data: {
         email: email || user.email,
+        nom: nom || user.nom,
+        date_inscription:  new Date(),
         password:
           password === user.password
             ? user.password

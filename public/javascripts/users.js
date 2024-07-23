@@ -49,6 +49,7 @@ function settingsUser(element) {
   container.style.position = 'absolute';
   container.style.top = '0';
   container.style.left = '0';
+  container.style.backgroundColor = '#e4e4e7c7';
   container.style.width = '100%';
   container.style.height = 'auto';
   element.style.display = 'flex';
@@ -132,7 +133,7 @@ function putUser() {
       userFetch(requestId);
     });
   }
-
+console.log(userId)
   putUser?.addEventListener("submit", async (e) => {
     try {
       e.preventDefault();
