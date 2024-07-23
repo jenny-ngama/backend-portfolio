@@ -1,17 +1,16 @@
 extends layout
   
 block content
-    div(class="h-full px-2")
-        h1(class="text-center font-extrabold text-lg md:text-2xl lg:text-3xl xl:text-4xl") Liste des messages
-        div(class="flex items-center justify-center gap-x-5")
-            div(class="w-2/5")
-                div(class="rounded-full text-lg text-red-700 font-bold border-2 border-solid border-slate-300 w-24 h-24 mx-auto flex justify-center items-center shadow-md") !{messages.filter(message => message.read === false).length}
-            ul.statistic(class="py-3 flex flex-col my-3 gap-y-2 w-3/5 border-2 border-solid border-slate-400")
-                h2(class='text-md font-bold mb-2 text-center') Les statistiques
+    div(class="h-full px-1 md:grid md:grid-cols-3 md:grid-rows-[max-content,auto] md:gap-6 md:items-start")
+        h1(class="text-center font-extrabold text-lg md:text-2xl md:col-start-2 md:col-end-4 md:row-start-1 md:row-end-2 lg:text-3xl xl:text-4xl") Liste des messages
+        div(class="flex items-center justify-center gap-x-5 md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3 md:flex-col md:gap-y-12")
+            div(class="w-2/5 md:w-full")
+                div(class="rounded-full text-lg text-red-700 font-bold border-2 border-solid border-slate-300 w-24 h-24 mx-auto flex justify-center items-center shadow-md md:w-32 md:h-32") !{messages.filter(message => message.read === false).length}
+            ul.statistic(class="py-3 flex flex-col my-3 gap-y-2 w-3/5 md:border-2 md:border-zinc-300 md:border-solid md:shadow-lg")
                 li(class="ml-6 text-sm") Total nessages: !{messages.length}
                 li(class="ml-6 text-sm") Messages non lus: !{messages.filter(message => message.read === false).length}
                 li(class="ml-6 text-sm") Messages lus: !{messages.filter(message => message.read === true).length}
-        div.liste-messages(class="bg-zinc-200 py-3 rounded-md shadow-inner shadow-zinc-400")
+        div.liste-messages(class="bg-zinc-200 py-3 rounded-md shadow-inner shadow-zinc-400 md:col-start-2 md:col-end-4 md:row-start-2 md:row-end-3")
             h2(class="font-bold text-md mb-3 py-3 flex justify-between items-center border-b-2 border-solid border-zinc-400") 
                 p(class='px-6') Vos messages
                 a(href="/messages" class='text-white bg-blue-900 mr-6 p-2 font-semibold rounded-lg text-sm') Actualiser
